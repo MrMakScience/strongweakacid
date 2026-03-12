@@ -89,6 +89,22 @@
             letter-spacing: 0.025em;
             margin-top: 4px;
         }
+
+        /* Fraction styling */
+        .fraction {
+            display: inline-flex;
+            flex-direction: column;
+            vertical-align: middle;
+            align-items: center;
+            line-height: 1;
+        }
+        .fraction .num {
+            padding: 0 2px;
+        }
+        .fraction .den {
+            border-top: 1px solid #94a3b8;
+            padding: 1px 2px 0;
+        }
     </style>
 </head>
 <body class="bg-slate-50 min-h-screen p-4 md:p-8 font-sans text-slate-900">
@@ -122,16 +138,25 @@
                     <h2 class="text-lg font-semibold mb-4 text-blue-700">2. Adjust Solution</h2>
                     
                     <div class="mb-6">
-                        <label class="block text-sm font-medium text-slate-700 mb-1">
-                            <span class="font-bold">Molarity</span> (<i>M</i>): <span id="molarityDisplay" class="font-mono text-blue-600">1.00</span> mol dm<sup>–3</sup>
-                        </label>
+                        <div class="flex justify-between items-center mb-1">
+                            <label class="block text-sm font-medium text-slate-700">
+                                <span class="font-bold">Molarity</span> (<i>M</i>): <span id="molarityDisplay" class="font-mono text-blue-600">1.00</span> mol dm<sup>–3</sup>
+                            </label>
+                            <div class="flex items-center gap-1.5 text-[10px] font-bold text-slate-400 bg-slate-100 px-2 py-1 rounded border border-slate-200">
+                                <span>M = </span>
+                                <div class="fraction">
+                                    <span class="num">n</span>
+                                    <span class="den">V</span>
+                                </div>
+                            </div>
+                        </div>
                         <input type="range" id="molaritySlider" min="0.1" max="5.0" step="0.01" value="1.0" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
                         <div class="slider-label-container"><span>Dilute</span><span>Concentrated</span></div>
                     </div>
 
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-slate-700 mb-1">
-                            <span class="font-bold">Initial Moles</span> (<i>n</i><sub>HA</sub>): <span id="molesDisplay" class="font-mono text-blue-600">1.0</span> mol
+                            <span class="font-bold">Mole</span> (<i>n</i><sub>HA</sub>): <span id="molesDisplay" class="font-mono text-blue-600">1.0</span> mol
                         </label>
                         <input type="range" id="molesSlider" min="1.0" max="5.0" step="0.1" value="1.0" class="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600">
                     </div>
@@ -358,7 +383,7 @@
                 if (pos.x < BORDER + 15) { pos.x = BORDER + 15; pos.vx *= -1; }
                 if (pos.x > beakerW - BORDER - 15) { pos.x = beakerW - BORDER - 15; pos.vx *= -1; }
                 if (pos.y < surfaceY + 15) { pos.y = surfaceY + 15; pos.vy *= -1; }
-                if (pos.y > beakerH - BORDER - 15) { pos.y = beakerH - BORDER - 15; pos.vy *= -1; }
+                if (pos.y > beakerH - BORDER - 15) { pos.y = beakerH - BORDER - 15; pos.vx *= -1; }
 
                 pos.hX += pos.hVx;
                 pos.hY += pos.hVy;
